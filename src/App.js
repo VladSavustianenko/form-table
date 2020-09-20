@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Form from './components/form'
+import Table from './components/table'
+import { USERS } from './data/users';
+
+class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      users: USERS
+    }
+
+    this.reloadUsers = this.reloadUsers.bind(this)
+  }
+
+  reloadUsers(users) {
+    this.setState({users: users})
+  }
+
+  render() {
+    return (
+      <div className="container">
+        <div className="row">
+          <Form reloadUsers={this.reloadUsers} />
+          <Table />
+        </div>
+      </div>
+    )
+  }
 }
 
 export default App;
